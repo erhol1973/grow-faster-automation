@@ -123,3 +123,4 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 .prose p+p{margin-top:12px}
 .prose ul{padding-left:20px;margin:10px 0}
 .lang a{text-decoration:none;opacity:.85}.lang a:hover{opacity:1}
+.brand img{display:block;height:32px;width:auto}
