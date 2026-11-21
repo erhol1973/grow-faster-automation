@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grow Faster Automatisatie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: kalm, zakelijk, direct; een vakman die het werk van een kmo begrijpt
+   IDEA: een werkvloer waar losse papieren en mails samenkomen op één rustige lijn
+   PICTURE: getekende stroom: mail, pdf en Excel lopen via Grow Faster naar het ERP
+   COLOUR and TYPE: Grow Faster-navy dominant, wit, één heldere blauwe accent; Source Serif titels, Inter tekst
+   LAYOUT: navy hero met tekening, daarna witte banden, navy afsluiter en footer */
+:root{color-scheme:light dark;
+ --navy:#0B2545;--bg:light-dark(#ffffff,#0a1628);--soft:light-dark(#f3f5f8,#0f1f36);
+ --ink:light-dark(#0B2545,#e9eef5);--muted:light-dark(#4a5a70,#a9b6c7);--line:light-dark(#dde3ea,#1f3354);
+ --acc:#3D7DD8;--acc-ink:light-dark(#1f5fb8,#8db8f0)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,52px)}h2{font-size:clamp(28px,3.4vw,38px)}h3{font-size:20px;line-height:1.25}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(40px,6vw,88px) max(5vw,16px)}
+.lead{font-size:18px;color:var(--muted);max-width:62ch;margin-top:14px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:8px;font-weight:600;text-decoration:none;font-size:16px}
+.btn.pri{background:var(--acc);color:#fff}.btn.pri:hover{background:#2f6cc4}
+.btn.sec{border:1.5px solid currentColor}
+a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px solid var(--acc);outline-offset:3px}
+
+/* navigatie */
+header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff}
+.nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:12px max(5vw,16px);max-width:1340px;margin:0 auto}
+.brand{font-weight:600;font-size:18px;text-decoration:none;margin-right:auto;letter-spacing:.2px}
+.nav nav{display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
+.nav nav a{text-decoration:none;opacity:.85}.nav nav a:hover{opacity:1}
+.lang{font-size:14px;opacity:.85}.lang b{opacity:1}
+.nav .btn{min-height:40px;padding:0 16px;font-size:15px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero .lead{color:#c9d4e3}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero svg{width:100%;height:auto;display:block}
+
+/* ervaring */
+.exp{background:var(--soft)}
+.exp .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px;align-items:center}
+.names{display:flex;flex-wrap:wrap;gap:10px 28px;font-family:"Source Serif 4",Georgia,serif;font-size:21px;color:var(--muted)}
+
+/* kaarten */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:36px}
+.card{border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.card p{color:var(--muted)}
+.card .tag{font-size:14px;color:var(--acc-ink);font-weight:600}
+.card .more{margin-top:auto;padding-top:8px;font-weight:600;color:var(--acc-ink);text-decoration:none}
+.sym .card{background:var(--soft);border:0}
+.sym .num{font-family:"Source Serif 4",Georgia,serif;font-size:34px;color:var(--acc-ink);line-height:1}
+
+/* orion */
+.orion{background:var(--soft)}
+.orion .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.pill{display:inline-block;font-size:14px;font-weight:600;padding:5px 12px;border-radius:99px;background:light-dark(#e3ecf9,#17345e);color:var(--acc-ink);margin-bottom:14px}
+.feat{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.feat li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px}
+.feat li::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--acc);margin-top:8px}
+.mock{border-radius:12px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.mock .bar{background:var(--navy);color:#fff;font-size:14px;padding:10px 16px;font-weight:600}
+.mock table{width:100%;border-collapse:collapse;font-size:14.5px}
+.mock td{padding:11px 16px;border-top:1px solid var(--line);vertical-align:top}
+.mock td:last-child{white-space:nowrap;text-align:right;color:var(--muted)}
+.ok{color:light-dark(#1d7a46,#6fd39b)!important}.chk{color:light-dark(#a35a00,#f0b45c)!important}
+.mock .note{font-size:13px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
+
+/* werkwijze */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;counter-reset:s}
+.step{padding:0 20px 0 0;border-top:3px solid var(--line);padding-top:18px;position:relative}
+.step:first-child{border-color:var(--acc)}
+.step h3{margin-bottom:8px}.step p{color:var(--muted)}
+.step .k{font-size:14px;font-weight:600;color:var(--acc-ink);margin-bottom:6px}
+
+/* check */
+.check .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.qs{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:8px}
+.qs label{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;min-height:44px}
+.qs input{position:absolute;opacity:0}
+.qs .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--muted);display:grid;place-items:center;margin-top:1px}
+.qs input:checked+.box{background:var(--acc);border-color:var(--acc)}
+.qs input:checked+.box::after{content:"";width:10px;height:6px;border:solid #fff;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px)}
+.qs label:has(input:checked){border-color:var(--acc);background:light-dark(#f2f7fe,#10284a)}
+.res{position:sticky;top:90px;background:var(--navy);color:#fff;border-radius:14px;padding:28px}
+.res .score{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(48px,6vw,64px);line-height:1}
+.res .meter{height:10px;border-radius:99px;background:#1d3a63;margin:18px 0}
+.res .meter i{display:block;height:100%;width:0;border-radius:99px;background:var(--acc);transition:width .35s}
+.res h3{margin-bottom:8px}.res p{color:#c9d4e3}
+.res .btn{margin-top:20px}
+.reset{background:none;border:0;color:var(--acc-ink);font:inherit;font-weight:600;cursor:pointer;margin-top:12px;padding:8px 0;min-height:44px}
+
+/* afsluiter en footer */
+.talk{background:var(--navy);color:#fff;text-align:left}
+.talk .wrap{display:flex;gap:24px;align-items:end;justify-content:space-between;flex-wrap:wrap}
+.talk .lead{color:#c9d4e3}
+footer{background:#071a33;color:#b9c6d8;font-size:14.5px}
+footer .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+footer h4{color:#fff;font-size:15px;margin:0 0 10px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none}footer a:hover{color:#fff}
+.legal{border-top:1px solid #1b3355;margin-top:32px;padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.draft{font-size:13px;color:#8fa3bd}
+
+@media(max-width:900px){
+ .hero .wrap,.exp .wrap,.orion .wrap,.check .wrap{grid-template-columns:minmax(0,1fr)}
+ .grid3{grid-template-columns:minmax(0,1fr)}
+ .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 0}
+ footer .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .res{position:static}
+ .nav nav{order:3;width:100%;gap:14px}
+}
+@media(max-width:600px){.steps{grid-template-columns:minmax(0,1fr)}.nav .btn{display:none}footer .wrap{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="nav">
+  <a class="brand" href="#top">Grow Faster</a>
+  <nav aria-label="Hoofdmenu">
+   <a href="#diensten">Diensten</a><a href="#orion">Orion</a><a href="#aanpak">Aanpak</a><a href="#check">Automatisatie-check</a><a href="#over">Over</a>
+  </nav>
+  <span class="lang"><b>NL</b> · FR</span>
+  <a class="btn pri" href="#gesprek">Plan een gesprek</a>
+ </div>
+</header>
+
+<main id="top">
+
+<section class="hero band">
+ <div class="wrap">
+  <div>
+   <h1>Minder overtypen. Meer ondernemen.</h1>
+   <p class="lead">Grow Faster automatiseert het repetitieve werk tussen mail, Excel en uw bedrijfssoftware. Zo krijgen uw mensen weer tijd voor klanten, kwaliteit en groei.</p>
+   <div class="ctas">
+    <a class="btn pri" href="#gesprek">Plan een gesprek</a>
+    <a class="btn sec" href="#check">Doe de automatisatie-check</a>
+   </div>
+  </div>
+  <svg viewBox="0 0 560 400" role="img" aria-label="Mails, pdf's en Excel-bestanden lopen via Grow Faster als één stroom naar uw bedrijfssoftware">
+   <defs>
+    <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#3D7DD8" stop-opacity=".15"/><stop offset="1" stop-color="#3D7DD8" stop-opacity=".9"/></linearGradient>
+   </defs>
+   <!-- losse bronnen -->
+   <g fill="none" stroke="#5d7aa3" stroke-width="1.5" stroke-dasharray="4 5">
+    <path d="M128 78 C190 90 190 180 250 196"/><path d="M128 200 C180 200 200 200 250 200"/><path d="M128 322 C190 310 190 220 250 204"/>
+   </g>
+   <g>
+    <rect x="28" y="46" width="100" height="64" rx="8" fill="#13335c" stroke="#4d6c97"/>
+    <path d="M28 54 L78 86 L128 54" fill="none" stroke="#9fb4d1" stroke-width="2"/>
+    <text x="78" y="132" fill="#c9d4e3" font-size="13" text-anchor="middle" font-family="Inter">Mail</text>
+   </g>
+   <g>
+    <path d="M44 166 h58 l18 18 v52 h-76z" fill="#13335c" stroke="#4d6c97"/>
+    <path d="M102 166 v18 h18" fill="none" stroke="#4d6c97"/>
+    <g stroke="#9fb4d1" stroke-width="2"><line x1="56" y1="196" x2="104" y2="196"/><line x1="56" y1="208" x2="104" y2="208"/><line x1="56" y1="220" x2="88" y2="220"/></g>
+    <text x="82" y="256" fill="#c9d4e3" font-size="13" text-anchor="middle" font-family="Inter">Pdf</text>
+   </g>
+   <g>
+    <rect x="28" y="290" width="100" height="64" rx="6" fill="#13335c" stroke="#4d6c97"/>
+    <g stroke="#4d6c97"><line x1="28" y1="311" x2="128" y2="311"/><line x1="28" y1="332" x2="128" y2="332"/><line x1="61" y1="290" x2="61" y2="354"/><line x1="95" y1="290" x2="95" y2="354"/></g>
+    <rect x="62" y="312" width="32" height="19" fill="#3D7DD8" opacity=".5"/>
+    <text x="78" y="376" fill="#c9d4e3" font-size="13" text-anchor="middle" font-family="Inter">Excel</text>
+   </g>
+   <!-- motor -->
+   <g>
+    <rect x="250" y="150" width="120" height="100" rx="14" fill="#3D7DD8"/>
+    <rect x="250" y="150" width="120" height="100" rx="14" fill="none" stroke="#9cc0f2" stroke-opacity=".6"/>
+    <text x="310" y="196" fill="#fff" font-size="15" font-weight="600" text-anchor="middle" font-family="Inter">Grow Faster</text>
+    <text x="310" y="216" fill="#e3edfb" font-size="12" text-anchor="middle" font-family="Inter">leest, controleert,</text>
+    <text x="310" y="231" fill="#e3edfb" font-size="12" text-anchor="middle" font-family="Inter">boekt in</text>
+   </g>
+   <!-- rustige lijn -->
+   <rect x="370" y="194" width="62" height="12" fill="url(#g1)"/>
+   <path d="M430 190 l12 10 l-12 10z" fill="#3D7DD8"/>
+   <!-- uitkomst -->
+   <g>
+    <rect x="446" y="120" width="96" height="160" rx="10" fill="#f4f7fb"/>
+    <rect x="446" y="120" width="96" height="26" rx="10" fill="#dfe8f4"/>
+    <rect x="446" y="136" width="96" height="10" fill="#dfe8f4"/>
+    <text x="494" y="138" fill="#0B2545" font-size="12" font-weight="600" text-anchor="middle" font-family="Inter">ERP</text>
+    <g font-family="Inter" font-size="11" fill="#0B2545">
+     <circle cx="464" cy="170" r="7" fill="#2a9a5a"/><path d="M460.5 170 l2.5 2.5 l4.5 -5" stroke="#fff" stroke-width="1.8" fill="none"/>
+     <rect x="478" y="166" width="50" height="8" rx="4" fill="#c9d6e7"/>
+     <circle cx="464" cy="204" r="7" fill="#2a9a5a"/><path d="M460.5 204 l2.5 2.5 l4.5 -5" stroke="#fff" stroke-width="1.8" fill="none"/>
+     <rect x="478" y="200" width="42" height="8" rx="4" fill="#c9d6e7"/>
+     <circle cx="464" cy="238" r="7" fill="#2a9a5a"/><path d="M460.5 238 l2.5 2.5 l4.5 -5" stroke="#fff" stroke-width="1.8" fill="none"/>
+     <rect x="478" y="234" width="46" height="8" rx="4" fill="#c9d6e7"/>
+    </g>
+    <text x="494" y="304" fill="#c9d4e3" font-size="13" text-anchor="middle" font-family="Inter">Uw software</text>
+   </g>
+  </svg>
+ </div>
+</section>
+
+<section class="exp band" id="over">
+ <div class="wrap">
+  <div>
+   <h2>Procesverbetering, geen IT-project</h2>
+   <p class="lead">Meer dan 20 jaar procesoptimalisatie, Lean en programmamanagement. Eerst begrijpen hoe het werk loopt, dan pas automatiseren.</p>
+  </div>
+  <div>
+   <p style="color:var(--muted);margin-bottom:12px">Ervaring opgebouwd bij onder meer</p>
+   <div class="names"><span>Volvo Group</span><span>Colruyt Group</span><span>Solvay</span><span>Telenet</span><span>ArcelorMittal</span><span>Ericsson</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="band sym">
+ <div class="wrap">
+  <h2>Herkent u dit?</h2>
+  <div class="grid3">
+   <div class="card"><span class="num">3×</span><h3>Dezelfde gegevens, drie keer getypt</h3><p>Van de mail naar Excel, van Excel naar het ERP, en nog eens voor de klant.</p></div>
+   <div class="card"><span class="num">?</span><h3>Documenten die niemand vindt</h3><p>Certificaten, offertes en specificaties zitten in mailboxen en mappen. Wie zoekt, verliest tijd.</p></div>
+   <div class="card"><span class="num">↻</span><h3>Elke week dezelfde vragen</h3><p>Klanten, leveranciers en auditors vragen wat u al lang weet. Iemand typt het telkens opnieuw.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="diensten">
+ <div class="wrap">
+  <h2>Kies uw instap</h2>
+  <p class="lead">Begin klein met een scan, laat een proces op maat automatiseren, of gebruik kant-en-klare software.</p>
+  <div class="grid3">
+   <div class="card"><span class="tag">Prijs op aanvraag</span><h3>Workflowscan</h3><p>We volgen het werk op uw vloer en in uw mailbox. U krijgt een overzicht van waar het handwerk zit en wat automatisatie oplevert.</p><a class="more" href="#gesprek">Vraag een scan aan →</a></div>
+   <div class="card"><span class="tag">Dienst</span><h3>Automatisatie op maat</h3><p>We bouwen de koppeling tussen uw mail, Excel en bedrijfssoftware, en houden ze daarna draaiende.</p><a class="more" href="#aanpak">Bekijk de aanpak →</a></div>
+   <div class="card"><span class="tag">Software</span><h3>Orion</h3><p>Kant-en-klare toepassingen voor herkenbare problemen. De eerste is voor voedingsbedrijven: klantvragenlijsten automatisch invullen.</p><a class="more" href="#orion">Ontdek Orion →</a></div>
+  </div>
+ </div>
+</section>
+
+<section class="orion band" id="orion">
+ <div class="wrap">
+  <div>
+   <span class="pill">In ontwikkeling · pilotbedrijven gezocht</span>
+   <h2>Orion vult uw klantvragenlijsten in</h2>
+   <p class="lead">Voedingsbedrijven beantwoorden elke week vragenlijsten van retailers en klanten. Orion haalt de antwoorden uit uw eigen documenten en toont bij elk antwoord waar het vandaan komt.</p>
+   <ul class="feat">
+    <li><span>Leest Excel, Word, pdf en mail, in het Nederlands en het Frans.</span></li>
+    <li><span>Elk antwoord met bron, zodat u het in één oogopslag nakijkt.</span></li>
+    <li><span>Volgende stap: leveranciersdocumenten bewaken, zodat antwoorden ook na een wijziging blijven kloppen.</span></li>
+   </ul>
+   <div class="ctas" style="margin-top:26px"><a class="btn pri" href="#gesprek">Word pilotbedrijf</a></div>
+  </div>
+  <div class="mock" aria-label="Voorbeeld van een ingevulde vragenlijst in Orion">
+   <div class="bar">Vragenlijst klant · 42 vragen</div>
+   <table>
+    <tr><td>Bevat het product sporen van noten?</td><td class="ok">Ingevuld · bron gevonden</td></tr>
+    <tr><td>Geldig IFS-certificaat van de productiesite?</td><td class="ok">Ingevuld · bron gevonden</td></tr>
+    <tr><td>Herkomst van de tarwebloem?</td><td class="ok">Ingevuld · bron gevonden</td></tr>
+    <tr><td>Houdbaarheid na opening?</td><td class="chk">Na te kijken</td></tr>
+   </table>
+   <div class="note">Voorbeeldweergave, geen echte klantgegevens.</div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="aanpak">
+ <div class="wrap">
+  <h2>Eerst het proces, dan de technologie</h2>
+  <div class="steps">
+   <div class="step"><div class="k">Stap 1</div><h3>Scannen</h3><p>We brengen in kaart waar uw mensen tijd verliezen aan handwerk.</p></div>
+   <div class="step"><div class="k">Stap 2</div><h3>Kiezen</h3><p>Samen kiezen we het proces dat het meeste oplevert voor de kleinste inspanning.</p></div>
+   <div class="step"><div class="k">Stap 3</div><h3>Bouwen</h3><p>We automatiseren in korte stappen. U ziet en test elk resultaat.</p></div>
+   <div class="step"><div class="k">Stap 4</div><h3>Beheren</h3><p>We houden de automatisatie draaiende en passen ze aan als uw werk verandert.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="check band" id="check" style="background:var(--soft)">
+ <div class="wrap">
+  <div>
+   <h2>Automatisatie-check</h2>
+   <p class="lead">Tien vragen, meteen een resultaat, zonder registratie. Vink aan wat in uw bedrijf voorkomt.</p>
+   <ul class="qs" id="qs"></ul>
+   <button class="reset" id="reset" type="button">Opnieuw beginnen</button>
+  </div>
+  <aside class="res" aria-live="polite">
+   <div class="score"><span id="n">0</span><span style="font-size:.45em;opacity:.7"> / 10</span></div>
+   <div class="meter"><i id="bar"></i></div>
+   <h3 id="rt">Vink aan wat u herkent</h3>
+   <p id="rd">Elke aangevinkte vraag is een proces dat vandaag waarschijnlijk met de hand gebeurt.</p>
+   <a class="btn pri" href="#gesprek">Bespreek uw resultaat</a>
+  </aside>
+ </div>
+</section>
+
+<section class="talk band" id="gesprek">
+ <div class="wrap">
+  <div>
+   <h2>Laten we praten</h2>
+   <p class="lead">Een eerste gesprek van een half uur, vrijblijvend. U vertelt waar het werk vastloopt, wij zeggen eerlijk of automatisatie helpt.</p>
+  </div>
+  <a class="btn pri" href="#gesprek">Plan een gesprek</a>
+ </div>
+</section>
+
+</main>
+
+<footer class="band">
+ <div class="wrap">
+  <div><h4>Grow Faster</h4><p>Workflow-automatisatie voor Vlaamse kmo's.</p></div>
+  <div><h4>Aanbod</h4><ul><li><a href="#diensten">Workflowscan</a></li><li><a href="#diensten">Automatisatie op maat</a></li><li><a href="#orion">Orion</a></li></ul></div>
+  <div><h4>Meer</h4><ul><li><a href="#aanpak">Aanpak</a></li><li><a href="#check">Automatisatie-check</a></li><li><a href="https://grow-faster.be">grow-faster.be</a></li></ul></div>
+  <div><h4>Over</h4><ul><li><a href="#gesprek">Contact</a></li><li><a href="#top">Privacybeleid</a></li><li><a href="#top">Cookiebeleid</a></li><li><a href="#top">Voorwaarden</a></li></ul></div>
+ </div>
+ <div class="wrap legal">
+  <span>© 2026 Grow Faster · Erlend Hollebosch</span>
+  <span class="draft">Concept: logo, ondernemingsnummer, adres, contactkanaal en de Franse versie volgen.</span>
+ </div>
+</footer>
+
+<script>
+{
+ const qs=[
+  "Typen medewerkers gegevens over van mail of pdf naar Excel of uw ERP?",
+  "Beantwoordt u telkens opnieuw dezelfde vragen van klanten of auditors?",
+  "Moet u documenten van leveranciers of klanten najagen?",
+  "Worden bestellingen of offertes met de hand ingegeven?",
+  "Worden facturen met de hand gecontroleerd of ingeboekt?",
+  "Maakt iemand elke week een rapport door Excel-bestanden samen te voegen?",
+  "Hangt een proces af van één persoon die weet hoe het werkt?",
+  "Gaan goedkeuringen rond via mail?",
+  "Zoeken medewerkers vaak naar de laatste versie van een document?",
+  "Worden planningen of voorraadlijsten met de hand bijgewerkt?"
+ ];
+ const ul=document.getElementById('qs');
+ ul.innerHTML=qs.map((q,i)=>'<li><label for="q'+i+'"><input type="checkbox" id="q'+i+'"><span class="box" aria-hidden="true"></span><span>'+q+'</span></label></li>').join('');
+ const n=document.getElementById('n'),bar=document.getElementById('bar'),rt=document.getElementById('rt'),rd=document.getElementById('rd');
+ const upd=()=>{
+  const c=ul.querySelectorAll('input:checked').length;
+  n.textContent=c;bar.style.width=(c*10)+'%';
+  if(c===0){rt.textContent='Vink aan wat u herkent';rd.textContent='Elke aangevinkte vraag is een proces dat vandaag waarschijnlijk met de hand gebeurt.'}
+  else if(c<=2){rt.textContent='Beperkt potentieel';rd.textContent='Er zijn enkele plekken met handwerk. Een gerichte automatisatie kan volstaan.'}
+  else if(c<=5){rt.textContent='Duidelijke kansen';rd.textContent='Meerdere processen draaien op handwerk. Een workflowscan toont waar u best begint.'}
+  else{rt.textContent='Groot potentieel';rd.textContent='Handwerk zit verspreid over uw bedrijf. Een workflowscan helpt om prioriteiten te zetten.'}
+ };
+ ul.addEventListener('change',upd);
+ document.getElementById('reset').addEventListener('click',()=>{ul.querySelectorAll('input').forEach(x=>x.checked=false);upd()});
+}
+</script>
+</body>
+</html>
