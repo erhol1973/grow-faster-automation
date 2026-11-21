@@ -4,7 +4,7 @@
    COLOUR and TYPE: Grow Faster-navy dominant, wit, één heldere blauwe accent; Source Serif titels, Inter tekst
    LAYOUT: navy hero met tekening, daarna witte banden, navy afsluiter en footer */
 :root{color-scheme:light dark;
- --navy:#0B2545;--bg:light-dark(#ffffff,#0a1628);--soft:light-dark(#f3f5f8,#0f1f36);
+ --navy:#011B44;--bg:light-dark(#ffffff,#0a1628);--soft:light-dark(#f3f5f8,#0f1f36);
  --ink:light-dark(#0B2545,#e9eef5);--muted:light-dark(#4a5a70,#a9b6c7);--line:light-dark(#dde3ea,#1f3354);
  --acc:#3D7DD8;--acc-ink:light-dark(#1f5fb8,#8db8f0)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
@@ -123,5 +123,5 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 .prose p+p{margin-top:12px}
 .prose ul{padding-left:20px;margin:10px 0}
 .lang a{text-decoration:none;opacity:.85}.lang a:hover{opacity:1}
-.brand img{display:block;height:32px;width:auto}
+.brand img{display:block;height:56px;width:auto;margin:-8px 0 -8px -14px}
 .orion-logo{display:block;height:44px;width:auto;border-radius:8px;margin-bottom:16px}
