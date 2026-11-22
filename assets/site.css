@@ -123,5 +123,5 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 .prose p+p{margin-top:12px}
 .prose ul{padding-left:20px;margin:10px 0}
 .lang a{text-decoration:none;opacity:.85}.lang a:hover{opacity:1}
-.brand img{display:block;height:56px;width:auto;margin:-8px 0 -8px -14px}
-.orion-logo{display:block;height:44px;width:auto;border-radius:8px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:9px}.brand svg{display:block}.brand span{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.orion-mark{display:flex;align-items:center;gap:9px;margin-bottom:16px}.orion-mark svg{display:block}.orion-mark span{font-size:21px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
